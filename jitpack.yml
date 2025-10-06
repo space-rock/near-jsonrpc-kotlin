@@ -1,0 +1,17 @@
+# JitPack configuration for near-jsonrpc-kotlin
+# This file configures JitPack to build the project correctly
+
+# Specify Java version
+jdk:
+  - openjdk21
+
+# Before install script - runs before the build
+before_install:
+  - cd scripts
+  - pip install -r requirements.txt
+  - bash codegen.sh
+  - cd ..
+
+# Installation command - build the project
+install:
+  - ./gradlew clean build publishToMavenLocal -x test
